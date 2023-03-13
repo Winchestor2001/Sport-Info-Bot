@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import lxml
 
 
-async def laliga():
+def laliga():
     url = "https://www.skysports.com/la-liga-table"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'lxml')

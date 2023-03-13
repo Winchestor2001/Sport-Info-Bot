@@ -1,5 +1,5 @@
-import aioschedule
 import asyncio
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from aiogram import executor
 
@@ -10,20 +10,16 @@ from utils.set_bot_commands import set_default_commands
 from utils.misc.liga_parsers import laliga
 
 
-async def liga_task():
-    aioschedule.every(5).seconds.do(laliga)
-    while True:
-        await aioschedule.run_pending()
-        await asyncio.sleep(1)
+scheduler = AsyncIOScheduler(timezone='Asia/Tashkent')
 
 
 async def on_startup(dispatcher):
     await set_default_commands(dispatcher)
 
     register_users_py(dispatcher)
-
-    asyncio.create_task(liga_task())
+    scheduler.add_job(laliga, trigger='interval', seconds=10)
 
 
 if __name__ == '__main__':
+    scheduler.start()
     executor.start_polling(dp, on_startup=on_startup, skip_updates=True)
