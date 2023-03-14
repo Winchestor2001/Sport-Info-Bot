@@ -46,3 +46,9 @@ async def get_liga_api():
             return await response.json()
 
 
+async def get_liga_table_api(liga):
+    data = {'liga': liga}
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f"{domain}/api/liga_table/", data=data) as response:
+            return await response.json()
+

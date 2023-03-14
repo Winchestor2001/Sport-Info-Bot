@@ -4,7 +4,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 async def liga_btn(data):
     btn = InlineKeyboardMarkup(row_width=2)
     btn.add(
-        *[InlineKeyboardButton(f"{item['name']}", callback_data=f"liga:{item['id']}") for item in data]
+        *[InlineKeyboardButton(f"{item['stiker']} {item['name']}", callback_data=f"liga:{item['id']}") for item in data]
     )
     return btn
 

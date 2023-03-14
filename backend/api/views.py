@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
@@ -23,7 +25,12 @@ class UserAPIView(APIView):
 
 class LigaTableAPIView(APIView):
     def get(self, request):
-        return Response(status=200)
+        liga = Liga.objects.get(pk=request.data.get('liga'))
+        liga = str(liga.name).lower()
+        teams = LigaTable.objects.filter(liga__contains=liga)
+        serializer = LigaTableSerializer(data=teams, many=True)
+        serializer.is_valid()
+        return Response({'liga': liga, 'data': serializer.data}, status=200)
 
     def post(self, request):
         team = LigaTable.objects.filter(team=request.data['team']).first()
