@@ -20,11 +20,13 @@ class LigaAdmin(admin.ModelAdmin):
 @admin.register(LigaTable)
 class LigaTableAdmin(admin.ModelAdmin):
     list_display = ['liga', 'team', 'score']
+    list_filter = ['liga']
 
 
 @admin.register(LigaPlayer)
 class LigaPlayerAdmin(admin.ModelAdmin):
     list_display = ['liga', 'team', 'player']
+    list_filter = ['liga']
 
 
 @admin.register(TopTeam)
@@ -34,7 +36,8 @@ class TopTeamAdmin(admin.ModelAdmin):
 
 @admin.register(GameCalendar)
 class GameCalendarAdmin(admin.ModelAdmin):
-    list_display = ['liga', 'team', 'date']
+    list_display = ['liga', 'tour', 'team', 'date']
+    list_filter = ['liga']
 
 
 

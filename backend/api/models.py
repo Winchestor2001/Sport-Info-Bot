@@ -16,14 +16,15 @@ class BotContext(models.Model):
 
 
 class Liga(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150, unique=True)
 
     def __str__(self):
         return self.name
 
 
 class LigaTable(models.Model):
-    liga = models.ForeignKey(Liga, on_delete=models.CASCADE)
+    liga = models.CharField(max_length=200)
+    place = models.IntegerField(null=True)
     team = models.CharField(max_length=200, unique=True)
     games = models.IntegerField()
     win = models.IntegerField()
@@ -34,35 +35,49 @@ class LigaTable(models.Model):
     def __str__(self):
         return self.team
 
+    class Meta:
+        ordering = ['place']
+
 
 class LigaPlayer(models.Model):
-    liga = models.ForeignKey(Liga, on_delete=models.CASCADE)
+    liga = models.CharField(max_length=200)
     team = models.CharField(max_length=200)
-    player = models.CharField(max_length=200)
+    player = models.CharField(max_length=200, unique=True)
     games = models.IntegerField()
     goals = models.IntegerField()
-    assist = models.IntegerField()
+    place = models.IntegerField(null=True)
 
     def __str__(self):
         return self.player
 
+    class Meta:
+        ordering = ['place']
+
 
 class TopTeam(models.Model):
-    team = models.CharField(max_length=200)
+    place = models.IntegerField(null=True)
+    team = models.CharField(max_length=200, unique=True)
     rate = models.IntegerField()
 
     def __str__(self):
         return self.team
 
+    class Meta:
+        ordering = ['place']
+
 
 class GameCalendar(models.Model):
-    liga = models.ForeignKey(Liga, on_delete=models.CASCADE)
+    liga = models.CharField(max_length=200)
+    tour = models.IntegerField(null=True)
     team = models.CharField(max_length=200)
     score = models.CharField(max_length=50)
     date = models.DateTimeField()
 
     def __str__(self):
         return self.team
+
+    class Meta:
+        ordering = ['tour']
 
 
 
