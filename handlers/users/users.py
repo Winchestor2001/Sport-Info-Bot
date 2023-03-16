@@ -1,3 +1,6 @@
+import datetime
+import os
+
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import *
@@ -39,6 +42,14 @@ async def show_teams_callback(c: CallbackQuery):
     cd = c.data.split(":")[-1]
     teams = await get_liga_table_api(int(cd))
     table_img = await draw_table(teams)
+    old_text = c.message.text
+    old_btn = c.message.reply_markup
+    today = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+
+    await c.message.delete()
+    await c.message.answer_photo(InputFile(table_img), caption=f"{today}")
+    await c.message.answer(old_text, reply_markup=old_btn)
+    os.unlink(table_img)
 
 
 def register_users_py(dp: Dispatcher):
