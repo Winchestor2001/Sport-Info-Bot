@@ -16,6 +16,13 @@ async def get_users_api():
             return await response.json()
 
 
+async def get_user_lang_api(user_id):
+    data = {'user_id': user_id}
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f"{domain}/api/user_lang/", data=data) as response:
+            return await response.json()
+
+
 async def update_liga_table_api(table):
     async with aiohttp.ClientSession() as session:
         async with session.post(f"{domain}/api/liga_table/", data=table) as response:

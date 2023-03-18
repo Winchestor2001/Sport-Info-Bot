@@ -16,11 +16,22 @@ class UserAPIView(APIView):
         return Response(serializer)
 
     def post(self, request):
-        TgUser.objects.update_or_create(
+        user = TgUser.objects.update_or_create(
             user_id=request.POST.get('user_id'),
             username=request.POST.get('username')
         )
+        serializer = GetUsersSerializer(data=user, instance=user)
+        if serializer.is_valid():
+            serializer.save()
         return Response(status=200)
+
+
+class GetUserInfoAPIView(APIView):
+    def get(self, request):
+        user_id = request.data.get('user_id')
+        user = TgUser.objects.get(user_id=user_id)
+        serializer = GetUsersSerializer(user).data
+        return Response(serializer, status=200)
 
 
 class LigaTableAPIView(APIView):

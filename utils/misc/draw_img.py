@@ -1,14 +1,14 @@
 from PIL import Image, ImageDraw, ImageFont
 
 
-async def draw_table(data):
-    image = f"{data['liga']}_table.jpg"
+async def draw_table(data, team_text: str):
+    image = f"{data['liga'].replace(' ', '')}_table.jpg"
     output = f'draw_images/{image}'
     img = Image.open('images/' + image)
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("fonts/MontserratAlternates-Bold.ttf", 30)
     draw.text((110, 50), "№", fill='#fff', font=font)
-    draw.text((200, 50), "Jamoa", fill='#fff', font=font)
+    draw.text((200, 50), team_text, fill='#fff', font=font)
     w = 110
     h = 175
     for team in data['data']:

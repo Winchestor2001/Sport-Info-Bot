@@ -9,7 +9,7 @@ async def liga_btn(data):
     return btn
 
 
-async def liga_info_btn(liga):
+async def liga_info_btn(liga, lang):
     btn = InlineKeyboardMarkup(row_width=2)
     btn.add(
         InlineKeyboardButton("Jamoalar Jadvali", callback_data=f"teams:{liga}"),

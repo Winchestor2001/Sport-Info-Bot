@@ -5,7 +5,7 @@ from .models import *
 class GetUsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = TgUser
-        fields = ['user_id']
+        fields = '__all__'
 
 
 class LigaSerializer(serializers.ModelSerializer):

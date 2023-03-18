@@ -5,14 +5,11 @@ from ckeditor_uploader.fields import RichTextUploadingField
 class TgUser(models.Model):
     user_id = models.BigIntegerField(verbose_name="User-ID", unique=True)
     username = models.CharField(max_length=150, verbose_name="Username", null=True)
+    language = models.CharField(max_length=10, default='uz')
+    team = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return "{} - {}".format(self.user_id, self.username)
-
-
-class BotContext(models.Model):
-    start_context = RichTextUploadingField()
-    info_context = RichTextUploadingField()
 
 
 class Liga(models.Model):

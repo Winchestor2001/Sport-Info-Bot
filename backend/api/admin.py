@@ -4,12 +4,7 @@ from .models import *
 
 @admin.register(TgUser)
 class TgUserAdmin(admin.ModelAdmin):
-    list_display = ['user_id', 'username']
-
-
-@admin.register(BotContext)
-class BotContextAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['user_id', 'username', 'language']
 
 
 @admin.register(Liga)
