@@ -4,12 +4,13 @@ from .models import *
 
 @admin.register(TgUser)
 class TgUserAdmin(admin.ModelAdmin):
-    list_display = ['user_id', 'username', 'language']
+    list_display = ['user_id', 'username', 'language', 'team']
 
 
 @admin.register(Liga)
 class LigaAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'is_active']
+    list_editable = ['is_active']
 
 
 @admin.register(LigaTable)
@@ -33,10 +34,3 @@ class TopTeamAdmin(admin.ModelAdmin):
 class GameCalendarAdmin(admin.ModelAdmin):
     list_display = ['liga', 'tour', 'team', 'date']
     list_filter = ['liga']
-
-
-
-
-
-
-

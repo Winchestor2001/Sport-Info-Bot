@@ -1,7 +1,7 @@
 import asyncio
 from aiogram import executor
 from handlers.users.users import register_users_py
-from loader import dp
+from loader import dp, bot
 import middlewares, filters, handlers
 from utils.set_bot_commands import set_default_commands
 from schedule_tasks import *

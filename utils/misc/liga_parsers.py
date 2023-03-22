@@ -71,12 +71,10 @@ async def laliga_calendar():
             guests = tb.find_all('td', attrs={'class': 'guests-td'})
             for date, owner, score, guest in zip(dates, owners, scores, guests):
                 team = owner.text.strip() + ' - ' + guest.text.strip()
-
                 try:
                     date = datetime.strptime(str(date.text.strip().replace('|', ' ')), '%d.%m.%Y %H:%M')
                 except ValueError:
                     date = datetime.strptime(str(date.text.strip().replace('|', ' ')), '%d.%m.%Y')
-
                 tour = t.text.strip().replace(' тур', '')
                 await update_liga_calendar_api(
                     {

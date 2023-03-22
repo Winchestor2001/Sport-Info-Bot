@@ -16,10 +16,10 @@ async def get_users_api():
             return await response.json()
 
 
-async def get_user_lang_api(user_id):
+async def get_user_info_api(user_id):
     data = {'user_id': user_id}
     async with aiohttp.ClientSession() as session:
-        async with session.get(f"{domain}/api/user_lang/", data=data) as response:
+        async with session.get(f"{domain}/api/user_info/", data=data) as response:
             return await response.json()
 
 
@@ -58,4 +58,45 @@ async def get_liga_table_api(liga):
     async with aiohttp.ClientSession() as session:
         async with session.get(f"{domain}/api/liga_table/", data=data) as response:
             return await response.json()
+
+
+async def update_user_lang_api(user_id, lang):
+    data = {'user': user_id, 'lang': lang}
+    async with aiohttp.ClientSession() as session:
+        async with session.put(f"{domain}/api/user_info/", data=data) as response:
+            pass
+
+
+async def get_teams_api():
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f"{domain}/api/teams/") as response:
+            return await response.json()
+
+
+async def update_user_team_api(user_id, team):
+    data = {'user': user_id, 'team': team}
+    async with aiohttp.ClientSession() as session:
+        async with session.post(f"{domain}/api/user_info/", data=data) as response:
+            pass
+
+
+async def get_liga_tours_api(liga):
+    data = {'liga': liga}
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f"{domain}/api/tours/", data=data) as response:
+            return await response.json()
+
+
+async def get_liga_tour_api(liga, tour):
+    data = {'liga': liga, 'tour': tour}
+    async with aiohttp.ClientSession() as session:
+        async with session.post(f"{domain}/api/tour/", data=data) as response:
+            return await response.json()
+
+
+async def get_top_teams_api():
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f"{domain}/api/top_team/") as response:
+            return await response.json()
+
 

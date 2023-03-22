@@ -37,3 +37,8 @@ class LigaCalendarSerializer(serializers.ModelSerializer):
         model = GameCalendar
         fields = '__all__'
 
+
+class GetTeamsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LigaTable
+        fields = ['team']
